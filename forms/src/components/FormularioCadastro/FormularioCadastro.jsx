@@ -1,43 +1,62 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-function FormularioCadastro(){
-    
-    return(
-          
+import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
+function FormularioCadastro() {
+
+    return (
+
         <form action="">
-            <TextField 
-                id="nome" 
-                label="nome" 
+            <TextField
+                id="nome"
+                label="nome"
                 variant="outlined"
+                margin="normal"
                 fullWidth
             />
-            <TextField 
-                id="sobrenome" 
-                label="Sobrenome" 
+            <TextField
+                id="sobrenome"
+                label="Sobrenome"
                 variant="outlined"
+                margin="normal"
                 fullWidth
             />
-            <TextField 
-                id="cpf" 
-                label="cpf"
+            <TextField
+                id="cpf"
+                label="CPF"
                 variant="outlined"
+                margin="normal"
                 fullWidth
             />
-            
 
-            <label>Promoções</label>
-            <input type="checkbox" name="" id=""/>
 
-            <label>Novidades</label>
-            <input type="checkbox" name="" id=""/>
+            <FormControlLabel
+                label="Promoções"
+                control={
+                    <Switch
+                        name="promocoes"
+                        defaultChecked
+                        color="primary" />}
+            />
 
-            <Button type="submit" variant="contained" color="primary">
+            <FormControlLabel
+                label="Novidades"
+                control={
+                    <Switch
+                        name="novidades"
+                        defaultChecked
+                        color="primary"
+                    />}
+            />
+
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+            >
                 Cadastrar
             </Button>
         </form>
     )
-    
+
 }
 
 export default FormularioCadastro;
