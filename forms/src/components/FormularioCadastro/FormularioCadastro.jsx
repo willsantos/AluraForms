@@ -1,13 +1,19 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 function FormularioCadastro() {
-    const [nome,setNome] = useState('');
-    
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(true);
+
+
+
     return (
 
-        <form onSubmit={(e)=>{
+        <form onSubmit={(e) => {
             e.preventDefault();
-            console.log("Enviado do Formulário",nome);
+            console.log("Enviado do Formulário", {nome, sobrenome,cpf,promocoes,novidades});
         }}>
             <TextField
                 id="nome"
@@ -16,11 +22,8 @@ function FormularioCadastro() {
                 margin="normal"
                 fullWidth
                 value={nome}
-                onChange={(e)=>{
+                onChange={(e) => {
                     setNome(e.target.value);
-                    if(nome.length >3){
-                        setNome(nome.substr(0,3));
-                    }
                 }}
             />
             <TextField
@@ -29,6 +32,11 @@ function FormularioCadastro() {
                 variant="outlined"
                 margin="normal"
                 fullWidth
+                value={sobrenome}
+                onChange={(e) => {
+                    setSobrenome(e.target.value);
+
+                }}
             />
             <TextField
                 id="cpf"
@@ -36,6 +44,11 @@ function FormularioCadastro() {
                 variant="outlined"
                 margin="normal"
                 fullWidth
+                value={cpf}
+                onChange={(e) => {
+                    setCpf(e.target.value);
+
+                }}
             />
 
 
@@ -44,8 +57,12 @@ function FormularioCadastro() {
                 control={
                     <Switch
                         name="promocoes"
-                        defaultChecked
-                        color="primary" />}
+                        checked={promocoes}
+                        color="primary"
+                        onChange={(e) => {
+                            setPromocoes(e.target.checked)
+                        }}
+                    />}
             />
 
             <FormControlLabel
@@ -53,8 +70,11 @@ function FormularioCadastro() {
                 control={
                     <Switch
                         name="novidades"
-                        defaultChecked
+                        checked={novidades}
                         color="primary"
+                        onChange={(e) => {
+                            setNovidades(e.target.checked)
+                        }}
                     />}
             />
 
