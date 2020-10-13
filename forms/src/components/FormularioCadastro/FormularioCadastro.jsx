@@ -1,19 +1,30 @@
-import { render } from '@testing-library/react';
-import React, { Component } from 'react';
-
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 function FormularioCadastro(){
     
     return(
           
         <form action="">
-            <label >Nome</label>
-            <input type="text" name="" id=""/>
-
-            <label >Sobrenome</label>
-            <input type="text" name="" id=""/>
-
-            <label >CPF</label>
-            <input type="text" name="" id=""/>
+            <TextField 
+                id="nome" 
+                label="nome" 
+                variant="outlined"
+                fullWidth
+            />
+            <TextField 
+                id="sobrenome" 
+                label="Sobrenome" 
+                variant="outlined"
+                fullWidth
+            />
+            <TextField 
+                id="cpf" 
+                label="cpf"
+                variant="outlined"
+                fullWidth
+            />
+            
 
             <label>Promoções</label>
             <input type="checkbox" name="" id=""/>
@@ -21,7 +32,9 @@ function FormularioCadastro(){
             <label>Novidades</label>
             <input type="checkbox" name="" id=""/>
 
-            <button type="submit">Cadastrar</button>
+            <Button type="submit" variant="contained" color="primary">
+                Cadastrar
+            </Button>
         </form>
     )
     
