@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import { Container, Typography } from '@material-ui/core';
+import './App.css';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
 import 'fontsource-roboto';
 
