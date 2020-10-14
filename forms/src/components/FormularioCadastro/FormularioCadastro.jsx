@@ -1,37 +1,38 @@
-import React,{ useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  Step, StepLabel, Stepper, Typography,
+} from '@material-ui/core';
 import DadosEntrega from './DadosEntrega';
 import DadosPessoais from './DadosPessoais';
 import DadosUsuario from './DadosUsuario';
-import {Step, StepLabel, Stepper, Typography} from '@material-ui/core';
-
 
 function FormularioCadastro({ onSubmitForm, validarCPF }) {
-  const [etapaAtual,setEtapaAtual] = useState(0);
-  const [dadosColetados,setDados] = useState({});
-  useEffect(()=>{
-    if(etapaAtual === formularios.length -1){
-      onSubmitForm(dadosColetados);
-    }
-  },[dadosColetados]);
-  const formularios = [
-    <DadosUsuario onSubmitForm={coletarDados}/>,
-    <DadosPessoais onSubmitForm={coletarDados} validarCPF={validarCPF}/>,
-    <DadosEntrega onSubmitForm={coletarDados}/>,
-    <Typography variant='h5'>Obrigado pelo Cadastro!</Typography>
-  ];
+  const [etapaAtual, setEtapaAtual] = useState(0);
+  const [dadosColetados, setDados] = useState({});
 
-  function coletarDados(dados){
-    setDados({...dadosColetados,...dados});
+  function proximo() {
+    setEtapaAtual(etapaAtual + 1);
+  }
+
+  function coletarDados(dados) {
+    setDados({ ...dadosColetados, ...dados });
     proximo();
   }
-  function proximo(){
-    setEtapaAtual(etapaAtual+1);
-  }
+  const formularios = [
+    <DadosUsuario onSubmitForm={coletarDados} />,
+    <DadosPessoais onSubmitForm={coletarDados} validarCPF={validarCPF} />,
+    <DadosEntrega onSubmitForm={coletarDados} />,
+    <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
+  ];
 
-  
+  useEffect(() => {
+    if (etapaAtual === formularios.length - 1) {
+      onSubmitForm(dadosColetados);
+    }
+  }, [dadosColetados]);
 
   return (
-      <>
+    <>
       <Stepper activeStep={etapaAtual}>
         <Step>
           <StepLabel>Login</StepLabel>
@@ -46,8 +47,8 @@ function FormularioCadastro({ onSubmitForm, validarCPF }) {
           <StepLabel>Finalização</StepLabel>
         </Step>
       </Stepper>
-        {formularios[etapaAtual]}
-      </>
+      {formularios[etapaAtual]}
+    </>
   );
 }
 
