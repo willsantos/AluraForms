@@ -53,7 +53,7 @@ function FormularioCadastro() {
         variant="outlined"
         margin="normal"
         fullWidth
-        onBlur={(e) => {
+        onBlur={() => {
           setErros({ cpf: { valido: false, texto: 'invalido' } });
         }}
         error={!erros.cpf.valido}
