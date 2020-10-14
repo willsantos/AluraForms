@@ -9,27 +9,21 @@ import { useState } from 'react';
 
 function FormularioCadastro({ onSubmitForm, validarCPF }) {
   const [etapaAtual,setEtapaAtual] = useState(0);
+  const formularios = [
+    <DadosUsuario onSubmitForm={proximo}/>,
+    <DadosPessoais onSubmitForm={proximo} validarCPF={validarCPF}/>,
+    <DadosEntrega onSubmitForm={onSubmitForm}/>
+  ];
 
   function proximo(){
     setEtapaAtual(etapaAtual+1);
   }
 
-  function formularioAtual(etapa){
-    switch (etapa){
-      case 0:
-        return <DadosUsuario onSubmitForm={proximo}/>
-      case 1:
-        return <DadosPessoais onSubmitForm={proximo} validarCPF={validarCPF}/>
-      case 2:
-        return <DadosEntrega onSubmitForm={onSubmitForm}/>
-      default:
-        return <Typography>Erro</Typography>
-    }
-  }
+  
 
   return (
       <>
-        {formularioAtual(etapaAtual)}
+        {formularios[etapaAtual]}
       </>
   );
 }
