@@ -3,7 +3,7 @@ import {
   Button, TextField, Switch, FormControlLabel,
 } from '@material-ui/core';
 
-function FormularioCadastro() {
+function FormularioCadastro({ onSubmitForm, validarCPF }) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [cpf, setCpf] = useState('');
@@ -20,8 +20,8 @@ function FormularioCadastro() {
 
     <form onSubmit={(e) => {
       e.preventDefault();
-      console.log('Enviado do Formulário', {
-        nome, sobrenome, cpf, promocoes, novidades,
+      onSubmitForm({
+        nome, sobrenome, cpf, novidades, promocoes,
       });
     }}
     >
@@ -53,14 +53,15 @@ function FormularioCadastro() {
         variant="outlined"
         margin="normal"
         fullWidth
-        onBlur={() => {
-          setErros({ cpf: { valido: false, texto: 'invalido' } });
-        }}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         value={cpf}
         onChange={(e) => {
           setCpf(e.target.value);
+        }}
+        onBlur={() => {
+          const isValid = validarCPF(cpf);
+          setErros({ cpf: isValid });
         }}
       />
 
@@ -75,7 +76,7 @@ function FormularioCadastro() {
               setPromocoes(e.target.checked);
             }}
           />
-                  )}
+                )}
       />
 
       <FormControlLabel
@@ -89,7 +90,7 @@ function FormularioCadastro() {
               setNovidades(e.target.checked);
             }}
           />
-                  )}
+                )}
       />
 
       <Button

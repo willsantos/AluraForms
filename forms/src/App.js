@@ -4,6 +4,17 @@ import './App.css';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
 import 'fontsource-roboto';
 
+function submitForm(data) {
+  console.log(data);
+}
+
+function validarCPF(cpf) {
+  if (cpf.length !== 11) {
+    return { valido: false, texto: 'Cpf invalido' };
+  }
+  return { valido: true, texto: '' };
+}
+
 function App() {
   return (
     <Container component="article" maxWidth="sm">
@@ -14,7 +25,7 @@ function App() {
       >
         Formulario de cadastro
       </Typography>
-      <FormularioCadastro />
+      <FormularioCadastro onSubmitForm={submitForm} validarCPF={validarCPF} />
 
     </Container>
 
