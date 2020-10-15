@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+/* eslint-disable no-restricted-syntax */
+import React, { useState, useContext } from 'react';
 import { Button, TextField } from '@material-ui/core';
+import ValidacoesCadastro from '../../contexts/ValidacoesCadastro';
 
-function DadosUsuario({ onSubmitForm,validacoes }) {
+function DadosUsuario({ onSubmitForm }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -11,25 +13,26 @@ function DadosUsuario({ onSubmitForm,validacoes }) {
       texto: '',
     },
   });
-  function validarCampos(e){
-    const {name,value} = e.target
-    const novoEstado = {...erros}
+  const validacoes = useContext(ValidacoesCadastro);
+  function validarCampos(e) {
+    const { name, value } = e.target;
+    const novoEstado = { ...erros };
     novoEstado[name] = validacoes[name](value);
-    setErros(novoEstado)
+    setErros(novoEstado);
   }
-  function possoEnviar(){
-    for(let campo in erros){
-     if (!erros[campo].valido){
-       return false;
-     }
+  function possoEnviar() {
+    for (const campo in erros) {
+      if (!erros[campo].valido) {
+        return false;
+      }
     }
-    return true
+    return true;
   }
   return (
     <form onSubmit={(e) => {
       e.preventDefault();
-      if(possoEnviar()){
-        onSubmitForm({ email, senha }); 
+      if (possoEnviar()) {
+        onSubmitForm({ email, senha });
       }
     }}
     >

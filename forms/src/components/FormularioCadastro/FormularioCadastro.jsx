@@ -19,15 +19,15 @@ function FormularioCadastro({ onSubmitForm, validacoes }) {
     proximo();
   }
   const formularios = [
-    <DadosUsuario 
-      onSubmitForm={coletarDados} 
-      validacoes={validacoes} 
-    />,
-    <DadosPessoais 
-      onSubmitForm={coletarDados} 
+    <DadosUsuario
+      onSubmitForm={coletarDados}
       validacoes={validacoes}
     />,
-    <DadosEntrega 
+    <DadosPessoais
+      onSubmitForm={coletarDados}
+      validacoes={validacoes}
+    />,
+    <DadosEntrega
       onSubmitForm={coletarDados}
       validacoes={validacoes}
     />,

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
   Button, TextField, Switch, FormControlLabel,
 } from '@material-ui/core';
+import ValidacoesCadastro from '../../contexts/ValidacoesCadastro';
 
-function DadosPessoais({ onSubmitForm, validacoes }) {
+function DadosPessoais({ onSubmitForm }) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [cpf, setCpf] = useState('');
@@ -16,30 +17,31 @@ function DadosPessoais({ onSubmitForm, validacoes }) {
       texto: '',
     },
   });
-  function validarCampos(e){
-    const {name,value} = e.target
-    const novoEstado = {...erros}
+  const validacoes = useContext(ValidacoesCadastro);
+  function validarCampos(e) {
+    const { name, value } = e.target;
+    const novoEstado = { ...erros };
     novoEstado[name] = validacoes[name](value);
-    setErros(novoEstado)
+    setErros(novoEstado);
   }
-  function possoEnviar(){
-    for(let campo in erros){
-     if (!erros[campo].valido){
-       return false;
-     }
+  function possoEnviar() {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const campo in erros) {
+      if (!erros[campo].valido) {
+        return false;
+      }
     }
-    return true
+    return true;
   }
   return (
 
     <form onSubmit={(e) => {
       e.preventDefault();
-      if(possoEnviar()){
+      if (possoEnviar()) {
         onSubmitForm({
-          
+
           nome, sobrenome, cpf, novidades, promocoes,
         });
-
       }
     }}
     >

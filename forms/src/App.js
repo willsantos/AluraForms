@@ -2,14 +2,13 @@ import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 import './App.css';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
-import {validarCPF,validarSenha} from './models/cadastro';
+import { validarCPF, validarSenha } from './models/cadastro';
 import 'fontsource-roboto';
+import ValidacoesCadastro from './contexts/ValidacoesCadastro';
 
 function submitForm(data) {
   console.log(data);
 }
-
-
 
 function App() {
   return (
@@ -21,10 +20,14 @@ function App() {
       >
         Formulario de cadastro
       </Typography>
-      <FormularioCadastro 
-        onSubmitForm={submitForm} 
-        validacoes={{cpf:validarCPF,senha:validarSenha}} 
-      />
+      <ValidacoesCadastro.Provider
+        value={{ cpf: validarCPF, senha: validarSenha }}
+      >
+        <FormularioCadastro
+          onSubmitForm={submitForm}
+        />
+
+      </ValidacoesCadastro.Provider>
 
     </Container>
 
