@@ -6,7 +6,7 @@ import DadosEntrega from './DadosEntrega';
 import DadosPessoais from './DadosPessoais';
 import DadosUsuario from './DadosUsuario';
 
-function FormularioCadastro({ onSubmitForm, validarCPF }) {
+function FormularioCadastro({ onSubmitForm, validacoes }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
   const [dadosColetados, setDados] = useState({});
 
@@ -19,10 +19,21 @@ function FormularioCadastro({ onSubmitForm, validarCPF }) {
     proximo();
   }
   const formularios = [
-    <DadosUsuario onSubmitForm={coletarDados} />,
-    <DadosPessoais onSubmitForm={coletarDados} validarCPF={validarCPF} />,
-    <DadosEntrega onSubmitForm={coletarDados} />,
-    <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
+    <DadosUsuario 
+      onSubmitForm={coletarDados} 
+      validacoes={validacoes} 
+    />,
+    <DadosPessoais 
+      onSubmitForm={coletarDados} 
+      validacoes={validacoes}
+    />,
+    <DadosEntrega 
+      onSubmitForm={coletarDados}
+      validacoes={validacoes}
+    />,
+    <Typography variant="h5">
+      Obrigado pelo Cadastro!
+    </Typography>,
   ];
 
   useEffect(() => {

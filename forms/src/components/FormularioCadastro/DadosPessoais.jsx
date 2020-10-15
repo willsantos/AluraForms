@@ -4,7 +4,7 @@ import {
   Button, TextField, Switch, FormControlLabel,
 } from '@material-ui/core';
 
-function DadosPessoais({ onSubmitForm, validarCPF }) {
+function DadosPessoais({ onSubmitForm, validacoes }) {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [cpf, setCpf] = useState('');
@@ -16,18 +16,36 @@ function DadosPessoais({ onSubmitForm, validarCPF }) {
       texto: '',
     },
   });
-
+  function validarCampos(e){
+    const {name,value} = e.target
+    const novoEstado = {...erros}
+    novoEstado[name] = validacoes[name](value);
+    setErros(novoEstado)
+  }
+  function possoEnviar(){
+    for(let campo in erros){
+     if (!erros[campo].valido){
+       return false;
+     }
+    }
+    return true
+  }
   return (
 
     <form onSubmit={(e) => {
       e.preventDefault();
-      onSubmitForm({
-        nome, sobrenome, cpf, novidades, promocoes,
-      });
+      if(possoEnviar()){
+        onSubmitForm({
+          
+          nome, sobrenome, cpf, novidades, promocoes,
+        });
+
+      }
     }}
     >
       <TextField
         id="nome"
+        name="nome"
         label="nome"
         variant="outlined"
         margin="normal"
@@ -39,6 +57,7 @@ function DadosPessoais({ onSubmitForm, validarCPF }) {
       />
       <TextField
         id="sobrenome"
+        name="sobrenome"
         label="Sobrenome"
         variant="outlined"
         margin="normal"
@@ -50,6 +69,7 @@ function DadosPessoais({ onSubmitForm, validarCPF }) {
       />
       <TextField
         id="cpf"
+        name="cpf"
         label="CPF"
         variant="outlined"
         margin="normal"
@@ -60,10 +80,7 @@ function DadosPessoais({ onSubmitForm, validarCPF }) {
         onChange={(e) => {
           setCpf(e.target.value);
         }}
-        onBlur={() => {
-          const isValid = validarCPF(cpf);
-          setErros({ cpf: isValid });
-        }}
+        onBlur={validarCampos}
       />
 
       <FormControlLabel
@@ -99,7 +116,7 @@ function DadosPessoais({ onSubmitForm, validarCPF }) {
         variant="contained"
         color="primary"
       >
-        Cadastrar
+        Próximo
       </Button>
     </form>
   );

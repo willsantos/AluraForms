@@ -2,18 +2,14 @@ import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 import './App.css';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
+import {validarCPF,validarSenha} from './models/cadastro';
 import 'fontsource-roboto';
 
 function submitForm(data) {
   console.log(data);
 }
 
-function validarCPF(cpf) {
-  if (cpf.length !== 11) {
-    return { valido: false, texto: 'Cpf invalido' };
-  }
-  return { valido: true, texto: '' };
-}
+
 
 function App() {
   return (
@@ -25,7 +21,10 @@ function App() {
       >
         Formulario de cadastro
       </Typography>
-      <FormularioCadastro onSubmitForm={submitForm} validarCPF={validarCPF} />
+      <FormularioCadastro 
+        onSubmitForm={submitForm} 
+        validacoes={{cpf:validarCPF,senha:validarSenha}} 
+      />
 
     </Container>
 

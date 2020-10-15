@@ -18,6 +18,7 @@ function DadosEntrega({ onSubmitForm }) {
     >
       <TextField
         id="cep"
+        name="cep"
         label="cep"
         type="number"
         variant="outlined"
@@ -30,6 +31,7 @@ function DadosEntrega({ onSubmitForm }) {
       />
       <TextField
         id="endereco"
+        name="endereco"
         label="endereco"
         type="text"
         variant="outlined"
@@ -42,6 +44,7 @@ function DadosEntrega({ onSubmitForm }) {
       />
       <TextField
         id="numero"
+        name="numero"
         label="numero"
         type="number"
         variant="outlined"
@@ -53,6 +56,7 @@ function DadosEntrega({ onSubmitForm }) {
       />
       <TextField
         id="estado"
+        name="estado"
         label="estado"
         type="text"
         variant="outlined"
@@ -64,6 +68,7 @@ function DadosEntrega({ onSubmitForm }) {
       />
       <TextField
         id="cidade"
+        name="cidade"
         label="cidade"
         type="text"
         variant="outlined"
